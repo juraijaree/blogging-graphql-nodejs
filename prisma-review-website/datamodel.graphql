@@ -1,0 +1,21 @@
+type User {
+  id: ID! @id
+  username: String! @unique
+  reviews: [Review!]! @relation(name: "ReviewToUser", onDelete: CASCADE)
+}
+
+type Movie {
+  id: ID! @id
+  name: String!
+  director: String!
+  releaseYear: Int!
+  reviews: [Review!]! @relation(name: "ReviewToMovie", onDelete: CASCADE)
+}
+
+type Review {
+  id: ID! @id
+  text: String
+  rating: Float!
+  movie: Movie! @relation(name: "ReviewToMovie", onDelete: SET_NULL)
+  author: User! @relation(name: "ReviewToUser", onDelete: SET_NULL)
+}
